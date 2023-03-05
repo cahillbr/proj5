@@ -114,6 +114,14 @@ class DynamicArray:
         """
         return self._size
 
+    def pop(self) -> object:
+        """
+        Removes the last element in the Array
+        """
+        last_obj = self.get_at_index(self._size - 1)
+        self.remove_at_index(self._size - 1)
+        return last_obj
+
     def get_capacity(self) -> int:
         """
         Return the capacity of the array
