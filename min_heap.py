@@ -1,4 +1,4 @@
-# Name:
+## Name:
 # OSU Email:
 # Course: CS261 - Data Structures
 # Assignment:
@@ -69,26 +69,55 @@ class MinHeap:
 
     def remove_min(self) -> object:
         """
-        This method returns an object with the minimum key and removes it from the heap. If the heap is empty, the
-        method raises a MinHeapException.
+        This method returns an object with the minimum key, and removes it from the heap.
+        If the heap is empty, the method raises a MinHeapException.
+
+        For the downward percolation of the replacement node:
+        if both children of the node have the same value (and are both smaller than the node),
+        swap with the left child.
 
         The runtime complexity of this implementation must be O(log N).
         """
-        min_key = self._heap[0]
-
         if self.is_empty():
             raise MinHeapException("MinHeap is empty")
-        elif self._heap.length() == 1:
-            self._heap.pop()
-            return min_key
 
-        min_key = self._heap[0]
-        last_node = self._heap.pop()
-        self._heap[0] = last_node
+        # Get the minimum value (at root) and replace with last leaf node
+        minimum = self._heap[0]
+        last_leaf_node = self._heap[self._heap.length() - 1]
+        self._heap[0] = last_leaf_node
+        self._heap.pop()
 
-        _percolate_down(self._heap, 0)
+        # Perform a downward percolation to restore heap property
+        current_index = 0
+        while current_index < self._heap.length():
+            left_child_index = 2 * current_index + 1
+            right_child_index = 2 * current_index + 2
 
-        return min_key
+            # If there is no child node, we are done.
+            if left_child_index >= self._heap.length():
+                break
+
+            # Determine the smallest child node
+            if right_child_index < self._heap.length():
+                left_child = self._heap[left_child_index]
+                right_child = self._heap[right_child_index]
+                if left_child <= right_child:
+                    smallest_child_index = left_child_index
+                else:
+                    smallest_child_index = right_child_index
+            else:
+                smallest_child_index = left_child_index
+
+            # Swap the current node with the smallest child node, if necessary
+            smallest_child = self._heap[smallest_child_index]
+            if last_leaf_node > smallest_child:
+                self._heap[current_index] = smallest_child
+                self._heap[smallest_child_index] = last_leaf_node
+                current_index = smallest_child_index
+            else:
+                break
+
+        return minimum
 
     def build_heap(self, da: DynamicArray) -> None:
         """
