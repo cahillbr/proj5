@@ -114,6 +114,13 @@ class DynamicArray:
         """
         return self._size
 
+    def pop(self) -> object:
+        """
+        Removes the last element in the Array
+        """
+        last_obj = self.get_at_index(self._size - 1)
+        self.remove_at_index(self._size - 1)
+        return last_obj
 
     def get_capacity(self) -> int:
         """
@@ -131,7 +138,6 @@ class DynamicArray:
         print(f"Length: {self._size}, Capacity: {self._capacity}, {self._data}")
 
     # -----------------------------------------------------------------------
-
 
     def resize(self, new_capacity: int) -> None:
         """
@@ -274,14 +280,6 @@ class DynamicArray:
             result = reduce_func(result, self._data[i])
 
         return result
-
-    def pop(self) -> object:
-        """
-        Removes the last element in the Array
-        """
-        last_obj = self.get_at_index(self._size - 1)
-        self.remove_at_index(self._size - 1)
-        return last_obj
 
 def find_mode(arr: DynamicArray) -> (DynamicArray, int):
     freq_dict = {}
