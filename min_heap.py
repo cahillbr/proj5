@@ -1,9 +1,9 @@
-## Name:
-# OSU Email:
+# Name: Brendan Cahill
+# OSU Email: cahillbr@oregonstate,edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: 5
+# Due Date: 2/6/2023
+# Description: using mini heap by implementing the following methods below
 
 
 from dynamic_array import *

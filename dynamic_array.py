@@ -1,9 +1,9 @@
 # Name: Brendan Cahill
 # OSU Email: cahillbr@oregonstate,edu
 # Course: CS261 - Data Structures
-# Assignment: 2
+# Assignment: 5
 # Due Date: 2/6/2023
-# Description:
+# Description: Added implementation for min_heap using pop
 
 
 from static_array import StaticArray
